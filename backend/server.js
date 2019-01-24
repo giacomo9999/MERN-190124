@@ -1,4 +1,5 @@
-require('dotenv').load();
+const dotenv = require("dotenv");
+dotenv.config();
 
 const mongoose = require("mongoose");
 const express = require("express");
@@ -11,7 +12,7 @@ const app = express();
 const router = express.Router();
 
 // this is our MongoDB database
-const dbRoute = connStr;
+const dbRoute = process.env.CONNSTR;
 
 // connects our back end code with the database
 mongoose.connect(
@@ -21,7 +22,7 @@ mongoose.connect(
 
 let db = mongoose.connection;
 
-db.once("open", () => console.log("connected to the database"));
+db.once("open", () => console.log("Jim says: connected to the database!"));
 
 // checks if connection with the database is successful
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
